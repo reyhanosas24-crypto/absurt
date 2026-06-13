@@ -2,39 +2,43 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Keur Maneh Nu Geulis</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* 1. Ngaganti warna background luar jadi pink lemes */
-            background-color: #3d3d3d; 
+            background-color: #ffe5ec; 
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
             overflow: hidden;
+            /* Nyégah téks kabaos/kaseleksi pas mémbal-mémbal klik */
+            user-select: none; 
         }
         .container {
             text-align: center;
-            /* 2. Ngaganti kotak tengah jadi bodas méh beresih sarta tulisanana katempo */
-            background: #00f2ff; 
+            background: #ffffff; 
             padding: 40px;
             border-radius: 20px;
-            /* Méré kalangkang lemes di tukangeun kotak */
             box-shadow: 0 10px 30px rgba(255, 75, 110, 0.15); 
             max-width: 400px;
             width: 90%;
         }
         h1 {
-            /* 3. Ngaganti warna tulisan judul jadi pink poék (Aesthetic) */
             color: #ff477e; 
             font-size: 26px;
             margin-bottom: 10px;
+            /* Méré animasi ratug jantung dina judul */
+            animation: ratug 1.2s infinite;
+        }
+        @keyframes ratug {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
         p {
-            /* 4. Ngaganti warna tulisan sub-judul jadi kulawu rada poék méh ngeunah dibaca */
             color: #4a4a4a; 
             font-size: 16px;
             margin-bottom: 30px;
@@ -53,9 +57,8 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
         }
-        /* 5. Warna Tombol MAU (Pink Keren) */
         #btn-mau {
             background-color: #ff7096;
             color: white;
@@ -64,7 +67,6 @@
             background-color: #ff477e;
             transform: scale(1.1);
         }
-        /* 6. Warna Tombol GA MAU (Kulawu Kalem) */
         #btn-gamau {
             background-color: #e0e0e0;
             color: #666666;
@@ -76,41 +78,39 @@
 
     <div class="container" id="main-card">
         <h1 id="headline">Hai Kamu... ❤️</h1>
-        <p id="subline">boleh kah minjam 10jt?</p>
+        <p id="subline">Mau ga jadi pacar aku?</p>
         
         <div class="btn-group">
-            <button id="btn-mau" onclick="terimaCinta()">Bolleh</button>
-            <button id="btn-gamau" onmouseover="kabur()" onclick="kabur()">Mbung ah</button>
+            <button id="btn-mau" onclick="terimaCinta()">Mau</button>
+            <button id="btn-gamau" onmouseover="kabur()" onclick="kabur()">Ga Mau</button>
         </div>
     </div>
 
     <script>
-        // Logika jang nyieun tombol "Ga Mau" kabur-kaburan
         function kabur() {
             const btn = document.getElementById('btn-gamau');
-            const rangeLuncat = 120; 
             
-            const x = (Math.random() - 0.5) * rangeLuncat * 2;
-            const y = (Math.random() - 0.5) * rangeLuncat * 2;
+            // Aturan luncat dinamis dumasar ukuran layar aslina
+            const lebarLayar = window.innerWidth - btn.clientWidth - 40;
+            const tinggiLayar = window.innerHeight - btn.clientHeight - 40;
+            
+            // Langsung luncat acak sa-layar bari aman ti batan kaluar tina visual
+            const x = Math.random() * (lebarLayar / 3) - (lebarLayar / 6);
+            const y = Math.random() * (tinggiLayar / 3) - (tinggiLayar / 6);
             
             btn.style.transform = `translate(${x}px, ${y}px)`;
         }
 
-        // Logika pas ngetok tombol "Mau"
         function terimaCinta() {
             const card = document.getElementById('main-card');
-            
-            // Ngarobah eusi card jadi pesen I Love Bandung nu ku maneh hayang
             card.innerHTML = `
-                <h1 style="font-size: 40px; color: #ff1493;">❤️ HAHA Thanks ❤️</h1>
+                <h1 style="font-size: 36px; color: #ff1493;">❤️ i love bandung ❤️</h1>
                 <p style="margin-top: 20px; font-weight: bold; color: #ff4d6d;">
                     Ciee... formalitasna ditarima! <br> Makasih nya geus milih 'Mau' (da emang moal bisa nolak oge sih wkwk).
                 </p>
             `;
-            
-            // Éfék tambahan ngarobah background body jadi leuwih caang pas ditarima
             document.body.style.backgroundColor = "#ffb3c1";
         }
     </script>
 </body>
-</html>                                                                             
+</html>                                         
